@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "ganache-cli": "^6.12.2"
+  }
+}

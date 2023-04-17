@@ -1,0 +1,12 @@
+truffle/node_modules
+website/node_modules
+truffle/build
+securify2/
+node_modules/
+.vscode/
+package-lock.json
+package.json
+website/package-lock.json
+website/package.json
+truffle/package-lock.json
+truffle/package.json
