@@ -503,7 +503,7 @@ const ItemButtonGroup = (props) => {
         handleWear();
       }}
     >
-      Wear this item
+      Move in this property
     </Button>
   ) : (
     <Button
@@ -512,7 +512,7 @@ const ItemButtonGroup = (props) => {
         handleUnwear();
       }}
     >
-      Unwear this item
+      Move out this property
     </Button>
   );
   const thridPerson = (

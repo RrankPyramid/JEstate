@@ -1,5 +1,4 @@
 import React from "react";
-import Web3 from "web3";
 import {
   Container,
   Typography,
@@ -206,16 +205,10 @@ function TabPanel(props) {
 
 const MyTooltip = withStyles((theme) => ({
   tooltip: {
-    // backgroundColor: '#f5f5f9',
-    // color: 'rgba(0, 0, 0, 0.87)',
     fontSize: 20,
-    // maxWidth: 220,
-    // fontSize: theme.typography.pxToRem(12),
-    // border: '1px solid #dadde9',
   },
 }))(Tooltip);
 
-// https://awantoch.medium.com/how-to-connect-web3-js-to-metamask-in-2020-fee2b2edf58a
 const Profile = (props) => {
   const classes = useStyles();
   const [profileAddress, setProfileAdress] = React.useState(
@@ -252,29 +245,7 @@ const Profile = (props) => {
   if(!window.eth && !window.ethereum){
     window.location.href = window.location.origin;
   }
-  // //const [transactions, setTransactions] = useRecoilState(transactionData);
 
-  // const [firstPersonUsername, setFirstPersonUsername] =
-  // useRecoilState(myUsername);
-
-  // console.log("profile all items", data);
-
-  // React.useEffect(async () => {
-  //   if(window.eth){
-  //   try {
-  //     window.web3 = new Web3("http://localhost:8545");
-  //     if (window.ethereum) {
-  //       await window.ethereum.enable(); // pop up
-  //       let myAddress = await window.ethereum.selectedAddress;
-  //     }
-  //   } catch (err) {
-  //     console.log("err",err);
-  //   }}
-  //   else{
-  //     console.log("deneme")
-  //     window.web3 = new Web3("http://localhost:8545");
-  //   }
-  // }, []);
 
   React.useEffect(async () => {
     let accounts = await window.ethereum.enable();
@@ -344,24 +315,13 @@ const Profile = (props) => {
           })
           .catch((err) => console.log("err", err));
       });
-    // contract.getPastEvents("allEvents", { fromBlock: 1}).then(console.log);
     nft_contract_interface
       .getPastEvents("nftTransaction", {
         fromBlock: 0,
         toBlock: "latest",
       })
       .then((events) => {
-        // setTransactions(events);
-
-        //          [numberSold, setNumberSold]
-        //          [earnedSold, setEarnedSold]
-        //          [numberBought, setNumberBought]
-        //          [spentBought, setSpentBought]
-
-        //TODO: bu doğru muhtemelen ama kontrol edilmeli
-        //FIXME: Doğruluğundan emin değilim
         const soldItems = events.filter((item) => {
-          // console.log("item ==> ", item);
           return (
             (item.returnValues[1] === "sold" || item.returnValues[1] === "Sold From Auction") &&
             item.returnValues[2].toLowerCase() === profileAddress.toLowerCase()
@@ -428,14 +388,6 @@ const Profile = (props) => {
             <TextField
               value={usernameEditText}
               onChange={(event) => setUsernameEditText(event.target.value)}
-              // onChange={(event) => {
-              //   // event.stopPropagation();
-              //   // event.preventDefault();
-              //   setUsernameEditText(event.target.value);
-              //   console.log("event.target.value", event.target.value);
-              //   console.log("event.target", event.target);
-              //   console.log("issetting", isSetting);
-              // }}
             />
           ) : (
             <Typography variant="h5">
@@ -746,7 +698,7 @@ const Profile = (props) => {
               textColor="primary"
               aria-label="scrollable force tabs example"
             >
-              <StyledTab
+              {/* <StyledTab
                 label={
                   <div>
                     <FaceIcon
@@ -756,7 +708,7 @@ const Profile = (props) => {
                   </div>
                 }
                 {...a11yProps(0)}
-              />
+              /> */}
               <StyledTab
                 label={
                   <div>
@@ -779,10 +731,10 @@ const Profile = (props) => {
 
     return (
       <>
-        <TabPanel value={value} index={0}>
+        {/* <TabPanel value={value} index={0}>
           <ProfileAvatar />
-        </TabPanel>
-        <TabPanel value={value} index={1}>
+        </TabPanel> */}
+        <TabPanel value={value} index={0}>
           <ProfileAllItems />
         </TabPanel>
       </>
@@ -893,10 +845,7 @@ const Profile = (props) => {
               </Button>
             ))}
           </Carousel>
-          {/* </Paper> */}
-          {/* <Paper variant="outlined" className={classes.paper}> */}
           <Carousel
-            //enableSwipe={false}
             renderArrow={({ type, onClick, isEdge }) => {
               const pointer =
                 type === consts.PREV ? (
@@ -961,8 +910,6 @@ const Profile = (props) => {
               </Button>
             ))}
           </Carousel>
-          {/* </Paper> */}
-          {/* <Paper variant="outlined" className={classes.paper}> */}
           <Carousel
             //enableSwipe={false}
             renderArrow={({ type, onClick, isEdge }) => {
@@ -1040,25 +987,6 @@ const Profile = (props) => {
               className={classes.myButton}
               style={{ float: "center", marginTop: 20 }}
               onClick={async () => {
-                // console.log(selectedHeadIndex);
-                // console.log(selectedMiddleIndex);
-                // console.log(selectedBottomIndex);
-
-                // console.log("---------");
-
-                // console.log(
-                //   selectedHeadIndex === -1 ? 0 : heads[selectedHeadIndex].tokenId
-                // );
-                // console.log(
-                //   selectedMiddleIndex === -1
-                //     ? 0
-                //     : middles[selectedMiddleIndex].tokenId
-                // );
-                // console.log(
-                //   selectedBottomIndex === -1
-                //     ? 0
-                //     : bottoms[selectedBottomIndex].tokenId
-                // );
 
                 var nft_contract_interface = new window.web3.eth.Contract(
                   NftContract.abi,
@@ -1101,13 +1029,7 @@ const Profile = (props) => {
             >
               Save
             </Button>
-            {/* <div>
-            <Button
-              className={classes.myButton}
-              style={{ float: "center", marginTop: 20 }}>
-              Add to the Avatars Page!
-            </Button>
-            </div> */}
+            {}
             </>
           )}
         </Grid>

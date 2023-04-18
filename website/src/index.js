@@ -4,11 +4,12 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { RecoilRoot } from "recoil";
+// import { ClickToComponent } from 'click-to-react-component';
 
 ReactDOM.render(
   <React.StrictMode>
     <RecoilRoot>
-    <App />
+      <App />
     </RecoilRoot>
   </React.StrictMode>,
   document.getElementById('root')

@@ -153,7 +153,7 @@ const MarketTab = () => {
             }
             {...a11yProps(0)}
           />
-          <StyledTab
+          {/* <StyledTab
             label={
               <div>
                 <FaceIcon style={{ verticalAlign: "middle", marginRight: 8 }} />{" "}
@@ -161,8 +161,8 @@ const MarketTab = () => {
               </div>
             }
             {...a11yProps(1)}
-          />
-          <StyledTab
+          /> */}
+          {/* <StyledTab
             label={
               <div>
                 <AccessibilityNewIcon
@@ -183,7 +183,7 @@ const MarketTab = () => {
               </div>
             }
             {...a11yProps(3)}
-          />
+          /> */}
         </StyledTabs>
       </AppBar>
       <div style={{ marginTop: 20, marginLeft: 45, marginRight: 60 }}>

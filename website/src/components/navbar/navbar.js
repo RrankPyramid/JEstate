@@ -288,53 +288,16 @@ const Navbar = () => {
     <div className={classes.grow}>
       <AppBar position="sticky">
         <Toolbar>
-          {/* <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-          >
-            <MenuIcon />
-          </IconButton> */}
+          {}
           <Button className={classes.title} variant="h6" noWrap onClick={() => {
                 window.location.href = "/";
               }} Button >
-            <img style={{height:50, marginTop:10}}src={"https://ipfs.io/ipfs/QmQogyec8HzYYc1rs5d6WBRGq79yPLjYNqgzSVVLxTB4g7"} alt={"NFT Suits"} />
+            <img style={{height:60, marginTop:10}}src={"https://ipfs.io/ipfs/QmTPZSY4ZGi9zbost5bEb8H6VLvE5xSHHLF6ZNqywXyMJE"} alt={"JEstate"} />
           </Button>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            {/* <div style={{ marginTop: 10 }}>{useRecoilValue(getUsername)}</div> */}
-
-            <Button
-              color="inherit"
-              onClick={() => {
-                window.location.href = "/avatars";
-              }}
-            >
-              <SupervisedUserCircleIcon
-                style={{
-                  verticalAlign: "middle",
-                  marginRight: 5,
-                  fontSize: 20,
-                }}
-              />
-              Avatars
-            </Button>
-            {/* <Button
-              color="inherit"
-              onClick={() => {
-                window.location.href = "/allItems";
-              }}
-            >
-              <LabelIcon
-                style={{
-                  verticalAlign: "middle",
-                  marginRight: 5,
-                  fontSize: 20,
-                }}
-              />
-              All items
-            </Button> */}
+            {}
+            {}
             <Button
               color="inherit"
               onClick={() => {
@@ -350,17 +313,7 @@ const Navbar = () => {
               />
               All items{/*Marketplace */}
             </Button>
-            {/* {window.ethereum && !window.ethereum.selectedAddress && (
-              <>
-                <Button
-                  onClick={() => {
-                    setTriggerEth(!triggerEth);
-                  }}
-                >
-                  Connect
-                </Button>
-              </>
-            )} */}
+            {}
             {window.ethereum && !window.ethereum.selectedAddress ? (
               <>
                 <Button

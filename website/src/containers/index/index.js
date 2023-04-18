@@ -69,8 +69,8 @@ const useStyles = makeStyles({
   boxes:{
     border: "1.5px solid #121212",
     borderRadius: 3,
-    height: 150,
-    width: 200,
+    height: 300,
+    width: 300,
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -118,11 +118,7 @@ const Index = () => {
 <Container maxWidth="md">
     <Snackbar
         open={snackOpen}
-        // autoHideDuration={3000}
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-        // onClose={()=>{
-        //             setSnackOpen(false)
-        //         }}
     >
       <SnackbarContent style={{
           backgroundColor:'#ff2015',
@@ -134,214 +130,67 @@ const Index = () => {
       />
     </Snackbar>
     <Typography variant="h2" align="center" component="h1" gutterbottom="true" style={{paddingTop:"2vw", color:"#00D54B", fontSize: 100}}>
-              NFT Suits
+              JEstate
             </Typography>  
-        <div style = {{ 
-              display: "flex", 
+            <div style={{
+              display: "flex",
               flexDirection: "row",
-              marginTop: 30, 
-              marginRight:"2vw", 
-              marginLeft:"2vw"
-            }}
-            >
-              <div  className={classes.boxes}
-                    onClick={() => {
-                    window.location.href = "/marketplace";
-                  }}>
-                <StoreMallDirectorySharpIcon style={{ color: "#8f84d8ff", fontSize: 50}}/>
-                <Typography className ={classes.boxText}>
-                  Buy and sell items with our community
-                </Typography>
-              </div>
+              alignItems: "center",
+              justifyContent: "center",
+              marginTop: 30,
+              marginRight: "2vw",
+              marginLeft: "2vw",
+              marginBottom: 40,
+            }}>
               <div className={classes.boxes}
-                  onClick={() => {
-                        window.location.href = "/marketplace";
+                onClick={() => {
+                  window.location.href = "/marketplace";
+                }}>
+                <img 
+                  src="https://ipfs.io/ipfs/Qme3Ceyp97hyp97F4CzDi468fP7nn6iviP6Q3iUNTRXtBH" 
+                  style={{
+                    width: "295px",
                   }}
-                  >
-                <DirectionsRunSharpIcon style={{ color: "#e333a5ff", fontSize: 50}}/>
-                <Typography className ={classes.boxText}>
-                  Chase and bid on the rarest items
-                </Typography>
-              </div>
-              <div className={classes.boxes}
-                  onClick={() => {
-                        window.location.href = "/marketplace";
-                  }}
-              >
-                <FormatListNumberedSharpIcon style={{ color: "#fa7658ff", fontSize: 50}}/>
-                <Typography className ={classes.boxText}>
-                  Make almost unlimited combinations
-                </Typography>
-              </div>
-              <div className={classes.boxes}
-                    onClick={() => {
-                        window.location.href = "/avatars";
-                  }}
-              >
-                <ShareSharpIcon style={{ color: "#f7c11fff", fontSize: 50}}/>
-                <Typography className ={classes.boxText}>
-                  Create and share your avatars
-                </Typography>
+                  />
               </div>
             </div>
 
-        <Grid style={{marginRight: "3vw", marginLeft: "3vw", marginTop:20}}>
+
+        <Grid style={{marginRight: "3vw", marginLeft: "3vw", marginTop:50}}>
             <Typography variant="h4" component="h1" gutterbottom="true" align ='start' style={{paddingTop:"2vw", color:"#00D54B"}}>
-              What is NFT Suits?
+              Welcome to JEState!
             </Typography>
             <div style={{display:"flex", flexDirection: "row" , marginBottom:-20}}>
               <FiberManualRecordIcon style={{fontSize:20,marginTop:21, color:"#00D54B"}}/>
               <Typography variant="body1" component="h1" gutterbottom="true" align ='start' style={{ color:"#f1ffe3", margin:20}}>
-                NFT Suits is a game centered around collectible items that can be worn to the head, top, and bottom.
+                JEState is a blockchain-based property trading platform set within an expansive metaverse. Here, you can buy, sell, and trade unique virtual properties that exist solely in the digital realm.
               </Typography>
             </div>
             <div style={{display:"flex", flexDirection: "row", marginBottom:-20}}>
               <FiberManualRecordIcon style={{fontSize:20,marginTop:21, color:"#00D54B"}}/>
               <Typography variant="body1" component="h1"  gutterbottom="true" align ='start' style={{ color:"#f1ffe3", margin:20}}>
-                Each item is <Typography style={{color:"#00D54B", fontWeight:"bold", display: "inline"}}>one-of-a-kind</Typography> and <Typography style={{color:"#00D54B", fontWeight:"bold", display: "inline"}}>100% owned by you</Typography>; it cannot be replicated, taken away, or destroyed. Your proof of ownership is stored <Typography style={{color:"#00D54B", fontWeight:"bold", display: "inline"}}>Ethereum blockchain</Typography>.
+                Each property is <Typography style={{color:"#00D54B", fontWeight:"bold", display: "inline"}}>one-of-a-kind</Typography> and <Typography style={{color:"#00D54B", fontWeight:"bold", display: "inline"}}>100% owned by you</Typography>; it cannot be duplicated, taken away, or destroyed. Your proof of ownership is securely stored on the <Typography style={{color:"#00D54B", fontWeight:"bold", display: "inline"}}>Ethereum blockchain</Typography>. 
               </Typography>
             </div>
             <div style={{display:"flex", flexDirection: "row", marginBottom:-20}}>
               <FiberManualRecordIcon style={{fontSize:20,marginTop:21, color:"#00D54B"}}/>
               <Typography variant="body1" component="h1"    gutterbottom="true" align ='start' style={{color:"#f1ffe3", margin:20}}>
-                Each item is either a head, top or bottom wear which you can <Typography style={{color:"#00D54B", fontWeight:"bold", display: "inline"}}>buy, bid on, and offer for auction and sale</Typography> via the marketplace.
+                As a user, you can <Typography style={{color:"#00D54B", fontWeight:"bold", display: "inline"}}>move into a property, buy or bid on available properties, and list your property for sale or auction </Typography>through our user-friendly marketplace.
               </Typography>
             </div>
             <div style={{display:"flex", flexDirection: "row", marginBottom:-20}}>
               <FiberManualRecordIcon style={{fontSize:20,marginTop:21, color:"#00D54B"}}/>
               <Typography variant="body1" component="h1"    gutterbottom="true" align ='start' style={{color:"#f1ffe3", margin:20}}>
-                You can create your <Typography style={{color:"#00D54B", fontWeight:"bold", display: "inline"}}>own avatar</Typography> by combining a head, a top and a bottom item, which is a <Typography style={{color:"#00D54B", fontWeight:"bold", display: "inline"}}>unique combination</Typography> within the whole community.
+                Create your own digital empire by <Typography style={{color:"#00D54B", fontWeight:"bold", display: "inline"}}>acquiring and managing a portfolio </Typography> of distinct virtual properties, while engaging with a thriving community of fellow property enthusiasts.
               </Typography>
             </div>
             <div style={{display:"flex", flexDirection: "row", marginBottom:-20}}>
               <FiberManualRecordIcon style={{fontSize:20,marginTop:21, color:"#00D54B"}}/>
               <Typography variant="body1" component="h1"    gutterbottom="true" align ='start' style={{color:"#f1ffe3", margin:20}}>
-                <Typography style={{color:"#00D54B", fontWeight:"bold", display: "inline"}}>Display your avatar</Typography> and brag about it, while others do so!
+                Join JEState and embark on an exciting journey in the world of metaverse property trading!
               </Typography>
             </div>
         </Grid>
-        
-      <Grid
-        container
-        direction="column"
-        justify="center"
-        alignItems="center"
-        >
-      <Grid >
-        <Typography variant="h3" gutterbottom="true"  style={{paddingTop:"5vw",color:"#00D54B"}}>
-          Team
-        </Typography>
-      </Grid>
-      <div>
-      <Grid>
-        <img style={{marginLeft:"10vw", marginRight:"10vw"}} src={team_bidis}  alt="fireSpot"/>
-      </Grid>
-      </div>
-      <Grid
-              container
-              direction="row"
-              justify="space-around"
-              alignItems="flex-start"
-              style={{paddingTop:"1vw", paddingBottom:"1vw"}}
-            >
-              <Grid style={{paddingLeft:"12vw"}}>
-              <Typography variant="body1" component="h1"    gutterbottom="true" align ='start' style={{color:"#00D54B"}}>
-                  Cavit Çakır
-              </Typography>
-
-              <IconButton
-                style={{marginLeft: -8}}
-                color="primary"
-                onClick={() => {
-                  window.location.href = 'https://github.com/cavitcakir'; 
-                }}
-              >
-                <GitHubIcon style={{ color: "#00D54B" }}/>
-              </IconButton>
-
-              <IconButton
-                color="primary"
-                onClick={() => {
-                  window.location.href = 'https://www.linkedin.com/in/cavitcakir/'; 
-                }}
-              >
-                <LinkedInIcon style={{ color: "#00D54B" }}/>
-              </IconButton>
-              </Grid>
-              
-
-              <Grid>
-              <Typography variant="body1" component="h1"    gutterbottom="true" align ='start' style={{color:"#00D54B"}}>
-                Kaya Kapağan
-              </Typography>
-
-              <IconButton
-                style={{marginLeft: 5}}
-                color="primary"
-                onClick={() => {
-                  window.location.href = 'https://github.com/kayakapagan'; 
-                }}
-              >
-                <GitHubIcon style={{ color: "#00D54B" }}/>
-              </IconButton>
-              <IconButton
-                color="primary"
-                onClick={() => {
-                  window.location.href = 'https://www.linkedin.com/in/kaya-k-41381b130/'; 
-                }}
-              >
-                <LinkedInIcon style={{ color: "#00D54B" }}/>
-                
-              </IconButton>
-              </Grid>
-              
-              <Grid>
-              <Typography variant="body1" component="h1"    gutterbottom="true" align ='start' style={{color:"#00D54B"}}>
-                  Görkem Köse
-              </Typography>
-              <IconButton
-                style={{marginLeft: 3}}
-                color="primary"
-                onClick={() => {
-                  window.location.href = 'https://github.com/gorkemkose'; 
-                }}
-              >
-                <GitHubIcon style={{ color: "#00D54B" }}/>
-              </IconButton>
-              <IconButton
-                color="primary"
-                onClick={() => {
-                  window.location.href = 'https://www.linkedin.com/in/ggorkemkose'; 
-                }}
-              >
-                <LinkedInIcon style={{ color: "#00D54B" }}/>
-              </IconButton>
-              </Grid>
-              
-              <Grid style={{paddingRight:"11vw"}}>
-              <Typography variant="body1" component="h1"    gutterbottom="true" align ='start' style={{color:"#00D54B"}}>
-                  Gökberk Yar
-              </Typography>
-              <IconButton
-                color="primary"
-                onClick={() => {
-                  window.location.href = 'https://github.com/gokberkyar'; 
-                }}
-              >
-                <GitHubIcon style={{ color: "#00D54B" }}/>
-              </IconButton>
-              <IconButton
-                color="primary"
-                onClick={() => {
-                  window.location.href = 'https://www.linkedin.com/in/gokberkyar/'; 
-                }}
-              >
-                <LinkedInIcon style={{ color: "#00D54B" }}/>
-              </IconButton>
-              </Grid>
-              
-            </Grid>       
-      </Grid>
     </Container>
     )
 }

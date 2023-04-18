@@ -99,7 +99,7 @@ const MarketPlace = () => {
   return (
     <Container maxWidth="md">
       <Typography variant="h4" style={{ marginBottom: 20, marginTop: 30 }}>
-        MarketPlace
+        JVerse MarketPlace
       </Typography>
       {/* {address && <> {address}</>} */}
 
