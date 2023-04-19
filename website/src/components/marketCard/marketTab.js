@@ -7,10 +7,8 @@ import PropTypes from "prop-types";
 import { atom, selector, useRecoilState, useRecoilValue } from "recoil";
 import {
   getMyUsername,
-  getHeads,
-  getMiddles,
-  getBottoms,
   getAllItemsFiltered,
+  getPropertyList,
 } from "../../recoils/selectors";
 import {
   myUsername,
@@ -35,8 +33,6 @@ import {
   TableRow,
   TableCell,
   TableContainer,
-  TableHead,
-  TableBody,
   IconButton,
   Switch,
   FormControl,
@@ -107,19 +103,12 @@ const MarketTab = () => {
   const [value, setValue] = React.useState(0);
 
   const items = useRecoilValue(allItems);
-  const heads = useRecoilValue(getHeads);
-  const middles = useRecoilValue(getMiddles);
-  const bottoms = useRecoilValue(getBottoms);
   const allItemsFiltered = useRecoilValue(getAllItemsFiltered);
+  const propertyList = useRecoilValue(getPropertyList);
 
   const [marketIsBiddable, setMarketIsBiddable] = useRecoilState(isBiddable);
   const [marketIsOnSale, setMarketIsOnSale] = useRecoilState(isOnSale);
   const [marketRariryLevel, setMarketRariryLevel] = useRecoilState(rarityLevel);
-
-  // console.log("allItems", items);
-  // console.log("heads", heads);
-  // console.log("middles", middles);
-  // console.log("bottoms", bottoms);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -153,37 +142,6 @@ const MarketTab = () => {
             }
             {...a11yProps(0)}
           />
-          {/* <StyledTab
-            label={
-              <div>
-                <FaceIcon style={{ verticalAlign: "middle", marginRight: 8 }} />{" "}
-                Bean{" "}
-              </div>
-            }
-            {...a11yProps(1)}
-          /> */}
-          {/* <StyledTab
-            label={
-              <div>
-                <AccessibilityNewIcon
-                  style={{ verticalAlign: "middle", marginRight: 8 }}
-                />{" "}
-                Top Wear{" "}
-              </div>
-            }
-            {...a11yProps(2)}
-          />
-          <StyledTab
-            label={
-              <div>
-                <AccessibilityNewIcon
-                  style={{ verticalAlign: "middle", marginRight: 8 }}
-                />{" "}
-                Bottom Wear{" "}
-              </div>
-            }
-            {...a11yProps(3)}
-          /> */}
         </StyledTabs>
       </AppBar>
       <div style={{ marginTop: 20, marginLeft: 45, marginRight: 60 }}>
@@ -271,13 +229,7 @@ const MarketTab = () => {
             {allItemsFiltered.length ? <MarketCardList marketCards={allItemsFiltered} /> : <>No Items Found</>}
           </TabPanel>
           <TabPanel value={value} index={1}>
-            {heads.length ? <MarketCardList marketCards={heads} isProfile={false} /> : <>No Items Found</>}
-          </TabPanel>
-          <TabPanel value={value} index={2}>
-            {middles.length ? <MarketCardList marketCards={middles} isProfile={false} />: <>No Items Found</>}
-          </TabPanel>
-          <TabPanel value={value} index={3}>
-            {bottoms.length ? <MarketCardList marketCards={bottoms} isProfile={false} />: <>No Items Found</>}
+            {propertyList.length ? <MarketCardList marketCards={propertyList} isProfile={false} /> : <>No Items Found</>}
           </TabPanel>
         </>
       )}

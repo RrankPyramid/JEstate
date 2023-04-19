@@ -83,7 +83,6 @@ const MarketCard = ({
   imgUrl,
   price,
   auctionPrice,
-  type,
   isBiddable,
   isOnSale,
   id,

@@ -105,12 +105,6 @@ const ItemButtonGroup = (props) => {
   }, [window.web3.eth,buttonTrigger]);
 
   const handlePutOnSale = () => {
-    // console.log("handlePutOnSaleCalled");
-    // console.log("contractInterface", contractInterface);
-    // console.log("sellPrice", "===>", sellPrice);
-    // console.log("tokenId", "===>", parseInt(id) + 1);
-    // console.log("data", "===>", data);
-    // console.log("price_in_bottons", "===>", sellPrice);
 
     contractInterface.methods
       .putOnSale(parseInt(id) + 1, window.web3.utils.toWei(sellPrice))
@@ -135,13 +129,6 @@ const ItemButtonGroup = (props) => {
   };
 
   const handleBuy = () => {
-    // console.log("handleBuy");
-    // console.log("contractInterface", contractInterface);
-    // console.log("tokenId", "===>", parseInt(id) + 1);
-    // console.log("data", "===>", data);
-    // console.log("price_in_bottons", "===>", sellPrice);
-    // console.log("price_in_bottons data sell price", "===>", data.sellPrice);
-
     contractInterface.methods
       .buyFromSale(parseInt(id) + 1)
       .send({ from: userAddress, value: data.sellPrice, gas: 3000000 })
@@ -167,11 +154,6 @@ const ItemButtonGroup = (props) => {
   };
 
   const handleCancelSale = () => {
-    // console.log("handleBuy");
-    // console.log("contractInterface", contractInterface);
-    // console.log("tokenId", "===>", parseInt(id) + 1);
-    // console.log("data", "===>", data);
-    // console.log("price_in_bottons", "===>", sellPrice);
 
     contractInterface.methods
       .cancelSale(parseInt(id) + 1)
@@ -194,48 +176,56 @@ const ItemButtonGroup = (props) => {
       });
   };
 
-  const handleWear = () => {
+  const handleOccupy = () => {
     contractInterface.methods
-      .wearItem(parseInt(id) + 1)
-      .send({ from: userAddress })
-      .on("transactionHash", function (hash) {
-        console.log(hash);
-      })
-      .on("confirmation", function (confirmationNumber, receipt) {
-        console.log(confirmationNumber, receipt);
-      })
-      .on("receipt", async function (receipt) {
-        // receipt example
-       // setButtonTrigger(!buttonTrigger);
-        console.log(receipt);
-        window.location.reload();
-      })
-      .on("error", async function (error, receipt) {
-        console.log(error, receipt);
-        var error_message = await getRevertReason(receipt.transactionHash, setSnackbarText, setSnackbarController);
-      });
+    .occupySingleProperty(parseInt(id) + 1)
+    .send({ from: userAddress })
+    .on("transactionHash", function (hash) {
+      console.log(hash);
+    })
+    .on("confirmation", function (confirmationNumber, receipt) {
+      console.log(confirmationNumber, receipt);
+    })
+    .on("receipt", async function (receipt) {
+      // receipt example
+      // setButtonTrigger(!buttonTrigger);
+      console.log(receipt);
+      window.location.reload();
+    })
+    .on("error", async function (error, receipt) {
+      console.log(error, receipt);
+      var error_message = await getRevertReason(
+        receipt.transactionHash,
+        setSnackbarText,
+        setSnackbarController
+      );
+    });
   };
 
-  const handleUnwear = () => {
+  const handleVacate = () => {
     contractInterface.methods
-      .unWearItem(parseInt(data.clothType))
-      .send({ from: userAddress })
-      .on("transactionHash", function (hash) {
-        console.log(hash);
-      })
-      .on("confirmation", function (confirmationNumber, receipt) {
-        console.log(confirmationNumber, receipt);
-      })
-      .on("receipt", async function (receipt) {
-        // receipt example
-       // setButtonTrigger(!buttonTrigger);
-        console.log(receipt);
-        window.location.reload();
-      })
-      .on("error", async function (error, receipt) {
-        console.log(error, receipt);
-        var error_message = await getRevertReason(receipt.transactionHash, setSnackbarText, setSnackbarController);
-      });
+    .vacateProperty()
+    .send({ from: userAddress })
+    .on("transactionHash", function (hash) {
+      console.log(hash);
+    })
+    .on("confirmation", function (confirmationNumber, receipt) {
+      console.log(confirmationNumber, receipt);
+    })
+    .on("receipt", async function (receipt) {
+      // receipt example
+      // setButtonTrigger(!buttonTrigger);
+      console.log(receipt);
+      window.location.reload();
+    })
+    .on("error", async function (error, receipt) {
+      console.log(error, receipt);
+      var error_message = await getRevertReason(
+        receipt.transactionHash,
+        setSnackbarText,
+        setSnackbarController
+      );
+    });
   };
 
   const handleBidding = () => {
@@ -487,7 +477,7 @@ const ItemButtonGroup = (props) => {
     </Button>
   );
 
-  const isDivider = // KULLANILMIYO 🐥🐥🐥🐥🐥🐥🐥
+  const isDivider =
     data.isBiddable && data.isOnSale ? (
       <Divider
         orientation="vertical"
@@ -496,11 +486,11 @@ const ItemButtonGroup = (props) => {
       />
     ) : null;
 
-  const wearButton = !data.isWearing ? (
+  const occupyButton = !data.isWearing ? (
     <Button
       className={classes.myButton}
       onClick={() => {
-        handleWear();
+        handleOccupy();
       }}
     >
       Move in this property
@@ -509,7 +499,7 @@ const ItemButtonGroup = (props) => {
     <Button
       className={classes.myButton}
       onClick={() => {
-        handleUnwear();
+        handleVacate();
       }}
     >
       Move out this property
@@ -539,7 +529,7 @@ const ItemButtonGroup = (props) => {
           justifyContent: "center",
         }}
       >
-        {wearButton}
+        {occupyButton}
         {auctionButton}
         {saleButton}
       </div>

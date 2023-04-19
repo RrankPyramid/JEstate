@@ -27,17 +27,7 @@ const MarketPlace = () => {
   if(!window.eth && !window.ethereum){
     window.location.href = window.location.origin;
   }
-
-  // var web3 = new Web3("http://localhost:8545");
-
-  // React.useEffect(async () => {
-  //   var smart_contract_interface = new window.web3.eth.Contract(
-  //     Username.abi,
-  //     "0x3635497D85eD625239632bfB8f25A3c06eBd6a77"
-  //   );
-  //   console.log("methods:", smart_contract_interface.methods);
-  // }, [window.web3.eth]);
-
+  
   React.useEffect(async () => {
     let accounts = await window.ethereum.enable();
     let myAddress = await window.ethereum.selectedAddress;
@@ -104,14 +94,6 @@ const MarketPlace = () => {
       {/* {address && <> {address}</>} */}
 
       <MarketTab style={{ marginTop: 10 }} />
-      {/* <div>
-        {data.map((item) => {
-          //console.log("item", item);
-          return item.name;
-        })}
-      </div> */}
-      {/* <div>{data.length}</div>
-      <Button onClick={() => console.log("button data", data)}>mybutton</Button> */}
     </Container>
   );
 };

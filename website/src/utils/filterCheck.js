@@ -3,7 +3,6 @@ export const filterCheck = (
   tempIsBiddable,
   tempIsOnSale,
   tempRarityLevel,
-  tempClothType
 ) => {
   return temp.filter((item) => {
     if (
@@ -12,7 +11,6 @@ export const filterCheck = (
       tempRarityLevel !== "all"
     ) {
       return (
-        item.clothType === tempClothType &&
         tempIsBiddable === item.isBiddable &&
         tempIsOnSale === item.isOnSale &&
         tempRarityLevel === item.rarity
@@ -25,7 +23,6 @@ export const filterCheck = (
     ) {
       // burda biddable undefined
       return (
-        item.clothType === tempClothType &&
         tempIsOnSale === item.isOnSale &&
         tempRarityLevel === item.rarity
       );
@@ -37,7 +34,6 @@ export const filterCheck = (
     ) {
       // burda onsale undefined
       return (
-        item.clothType === tempClothType &&
         tempIsBiddable === item.isBiddable &&
         tempRarityLevel === item.rarity
       );
@@ -50,7 +46,6 @@ export const filterCheck = (
     ) {
       // burda rarity undefined
       return (
-        item.clothType === tempClothType &&
         tempIsBiddable === item.isBiddable &&
         tempIsOnSale === item.isOnSale
       );
@@ -62,7 +57,7 @@ export const filterCheck = (
     ) {
       // burda biddable ve onsale undefined
       return (
-        item.clothType === tempClothType && tempRarityLevel === item.rarity
+        tempRarityLevel === item.rarity
       );
     }
 
@@ -72,7 +67,7 @@ export const filterCheck = (
       tempRarityLevel === "all"
     ) {
       // burda biddable ve rarity undefined
-      return item.clothType === tempClothType && tempIsOnSale === item.isOnSale;
+      return tempIsOnSale === item.isOnSale;
     }
 
     if (
@@ -82,7 +77,7 @@ export const filterCheck = (
     ) {
       // burda onsale ve rarity undefined
       return (
-        item.clothType === tempClothType && tempIsBiddable === item.isBiddable
+       tempIsBiddable === item.isBiddable
       );
     }
 
@@ -91,17 +86,7 @@ export const filterCheck = (
       tempIsOnSale === false &&
       tempRarityLevel === "all"
     ) {
-      return item.clothType === tempClothType;
+      return true;
     }
-
-    //   console.log(
-    //     "ERROR ERROR ERROR ERROR",
-    //     "tempIsBiddable:",
-    //     tempIsBiddable,
-    //     "tempIsOnSale: ",
-    //     tempIsOnSale,
-    //     "tempRarityLevel: ",
-    //     tempRarityLevel
-    //   );
   });
 };

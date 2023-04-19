@@ -132,8 +132,6 @@ const ItemPage = (props) => {
               .ownerOf(currentTokenId)
               .call()
               .then((owner) => {
-                // console.log("currentTokenId", currentTokenId);
-                // console.log("owner", owner);
                 setData({ ...currentNftData, owner: owner });
 
                 getUsername(nft_contract_interface, owner).then(
@@ -167,56 +165,15 @@ const ItemPage = (props) => {
 
       nft_contract_interface.events.nftTransaction({
         filter: { id: parseInt(myId) + 1 },
-        //endBlock:"latest", // Using an array means OR: e.g. 20 or 23
         fromBlock: "latest",
     }, function(error, event){})
     .on('data', function(event){
-        // console.log("on data",event); // same results as the optional callback above
-        // event.reverse();
-        // setTransactions((prev) => [event,...prev,]);
-        // console.log("elma",[...new Set(event)])
-
-        // console.log("eventtttttttttt", event);
-        
-        // event.constructedFromUsername = await getUsername(nft_contract_interface, event.returnValues.fromAddress).then(
-        //                                                 (data) => {
-        //                                                   return data.username;
-        //                                                 }
-        //                                               );
-        // event.constructedToUsername = await getUsername(nft_contract_interface, event.returnValues.toAddress).then(
-        //                                   (data) => {
-        //                                     return data.username;
-        //                                   }
-        //                                 );
-
-        // console.log("eeeeeeeeeeeevent", event);
         window.location.reload();
-        // setTransactions((prev) => {
-          
-        //   for (let i = 0; i < prev.length; i++) {
-        //     if(prev[i].id == event.id){
-        //       return prev;
-        //     }
-        //     // else{
-        //     //   window.location.reload();
-        //     // }
-        //   }
-        //   return [event,...prev];
-        // } );
     })
     .on('changed', function(event){
-        // remove event from local database
-        // setTransactions([...event]);
         console.log("event is changed",event);
     })
     .on('error', console.error);
-    
-
-    // var event = nft_contract_interface.events.nftTransaction(
-    //   (error, result) => {
-    //     if (!error) console.log("result", result);
-    //   }
-    // );
   }, [window.web3.eth]);
 
   const classes = useStyles();
@@ -343,12 +300,7 @@ const ItemPage = (props) => {
                         }}
                       >
                         {owner}
-                        {/* {data.owner.slice(0, 4) +
-                          "..." +
-                          data.owner.slice(
-                            data.owner.length - 2,
-                            data.owner.length
-                          )} */}
+                        {}
                       </Button>
                     </div>
                     <div
@@ -485,27 +437,6 @@ const ItemPage = (props) => {
                                     window.location = "/profile/" + data.owner;
                                   }}
                                 >
-                                  {/* {
-                                    contractInterface !== "empty"
-                                    ? getUsername(contractInterface, transaction.returnValues.fromAddress).then(
-                                          (data) => {
-                                            return data.username;
-                                          }
-                                        )
-
-                                    : transaction.returnValues.fromAddress.slice(
-                                      0,
-                                      4
-                                    ) +
-                                      "..." +
-                                      transaction.returnValues.fromAddress.slice(
-                                        transaction.returnValues.fromAddress
-                                          .length - 2,
-                                        transaction.returnValues.fromAddress
-                                          .length
-                                      )
-                                  } */}
-                                  {/* {transaction.constructedFromUsername} */}
                                   {transaction.returnValues.fromAddress.slice(
                                     0,
                                     4
@@ -533,25 +464,6 @@ const ItemPage = (props) => {
                                     window.location = "/profile/" + data.owner;
                                   }}
                                 >
-                                  {/* {
-                                    contractInterface !== "empty"
-                                    ? getUsername(contractInterface, transaction.returnValues.toAddress).then(
-                                        (data) => {
-                                          return data.username;
-                                        }
-                                      )
-                                    : transaction.returnValues.toAddress.slice(
-                                      0,
-                                      4
-                                     ) +
-                                      "..." +
-                                      transaction.returnValues.toAddress.slice(
-                                        transaction.returnValues.toAddress
-                                          .length - 2,
-                                        transaction.returnValues.toAddress.length
-                                      )
-                                  } */}
-                                  {/* {transaction.constructedToUsername} */}
                                   {transaction.returnValues.toAddress.slice(
                                     0,
                                     4

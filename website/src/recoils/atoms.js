@@ -7,7 +7,7 @@ const myUsername = atom({
 
 const profileDataAtom = atom({
   key: "profileDataAtom", // unique ID (with respect to other atoms/selectors)
-  default: { username: "loading...", head: 0, middle: 0, bottom: 0 }, // default value (aka initial value)
+  default: { username: "loading...", propertyID: 0 }, // default value (aka initial value)
 });
 
 const myAddress = atom({

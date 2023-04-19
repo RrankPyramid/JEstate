@@ -128,14 +128,10 @@ const Navbar = () => {
           Nft.abi,
           addresses.NFT_CONTRACTS_ADDRESS
         );
-
-        // console.log("methods:", smart_contract_interface.methods);
-
         smart_contract_interface.methods
           .users(myAddress)
           .call()
           .then((data) => {
-            // console.log("dataa", data);
             setUsername(data.username);
           })
           .catch((error) => {
@@ -147,17 +143,17 @@ const Navbar = () => {
               .users(myAddress)
               .call()
               .then(async (data) => {
-                let headImg = "";
-                if (data.head != 0) {
-                  headImg = await smart_contract_interface
+                let propertyImg = "";
+                if (data.property != 0) {
+                  propertyImg = await smart_contract_interface
                                   .methods
-                                  .nfts(data.head - 1)
+                                  .nfts(data.property - 1)
                                   .call()
                                   .then((data) => {
                                     return data.cid
                                   })
                 }
-                setAvatarHead(headImg);
+                setAvatarHead(propertyImg);
               })
 
       }
@@ -210,18 +206,6 @@ const Navbar = () => {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem onClick={() => {
-                window.location.href = "/avatars";
-              }}>
-              <SupervisedUserCircleIcon
-                style={{
-                  verticalAlign: "middle",
-                  marginRight: 5,
-                  fontSize: 20,
-                }}
-              />
-              Avatars
-      </MenuItem>
       <MenuItem onClick={() => {
                 window.location.href = "/marketplace";
               }}>

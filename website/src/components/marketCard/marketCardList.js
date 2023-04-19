@@ -53,14 +53,6 @@ const MarketCardList = (props) => {
       className={classes.gridList}
     >
       {props.marketCards.map((cardItem, index) => {
-        // console.log(
-        //   cardItem.name,
-        //   cardItem.rarity,
-        //   cardItem.cid,
-        //   cardItem.sellPrice,
-        //   cardItem.maxBid,
-        //   cardItem.clothType
-        // );
         return (
           <GridListTile key={index}>
             <MarketCard
@@ -70,7 +62,6 @@ const MarketCardList = (props) => {
               imgUrl={"https://ipfs.io/ipfs/"+cardItem.cid}
               price={cardItem.sellPrice}
               auctionPrice={cardItem.maxBid}
-              type={cardItem.clothType}
               isBiddable={cardItem.isBiddable}
               isOnSale={cardItem.isOnSale}
               id={cardItem.id}
@@ -84,28 +75,6 @@ const MarketCardList = (props) => {
 };
 
 {
-  /* <GridList cellHeight={180} className={classes.gridList}>
-  <GridListTile key="Subheader" cols={2} style={{ height: "auto" }}>
-    <ListSubheader component="div">December</ListSubheader>
-  </GridListTile>
-  {tileData.map((tile) => (
-    <GridListTile key={tile.img}>
-      <img src={tile.img} alt={tile.title} />
-      <GridListTileBar
-        title={tile.title}
-        subtitle={<span>by: {tile.author}</span>}
-        actionIcon={
-          <IconButton
-            aria-label={`info about ${tile.title}`}
-            className={classes.icon}
-          >
-            <InfoIcon />
-          </IconButton>
-        }
-      />
-    </GridListTile>
-  ))}
-</GridList>; */
 }
 
 export default withWidth()(MarketCardList);
