@@ -1,12 +1,10 @@
-pragma solidity 0.5.0;
+// SPDX-License-Identifier: MIT
+pragma solidity 0.8.19;
 
-//import "https://github.com/OpenZeppelin/openzeppelin-contracts/tree/docs-org/contracts/token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts/token/ERC721/ERC721Full.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 
-
-contract nftContract is ERC721Full {
+contract nftContract is ERC721Enumerable {
     struct nftData {
-        uint256 clothType; //--> 1 --> head, 2 --> middle, 3 --> bottom
         string name;
         string cid;
         string rarity;
@@ -15,13 +13,11 @@ contract nftContract is ERC721Full {
         bool isBiddable;
         uint256 maxBid;
         address maxBidder;
-        bool isWearing;
+        bool isOccupied;
     }
 
     struct userData {
-        uint256 head; 
-        uint256 middle;
-        uint256 bottom;
+        uint256 property;
         string username;
         uint256 userBalance;
     }
@@ -33,124 +29,59 @@ contract nftContract is ERC721Full {
         address toAddress,
         uint256 value
     );
-    
+
     mapping(address => userData) public users;
     mapping(string => bool) isExist;
     nftData[] public nfts;
 
- 
-    address  public owner;
-    uint public maxSupply;
-    
-    constructor() public ERC721Full("nftContract", "NFTC") {
+    address public owner;
+    uint256 public maxSupply;
+
+    constructor() ERC721("nftContract", "NFTC") {
         owner = msg.sender;
-        maxSupply=100;
+        maxSupply = 100;
     }
 
     function setUsername(string memory _username) public {
         users[msg.sender].username = _username;
     }
 
-    function wearItems(
-        uint256 _headTokenId,
-        uint256 _middleTokenId,
-        uint256 _bottomTokenId
-    ) public {
+    function occupyProperty(uint256 _propertyTokenId) public {
         require(
-            _headTokenId == 0 ||
-                (this.ownerOf(_headTokenId) == msg.sender &&
-                    nfts[_headTokenId - 1].clothType == 1)
-        ,"you must be the owner or you tried not head item on head");
-        require(
-            _middleTokenId == 0 ||
-                (this.ownerOf(_middleTokenId) == msg.sender &&
-                    nfts[_middleTokenId - 1].clothType == 2)
-        ,"you must be the owner or you tried not middle item on middle");
-        require(
-            _bottomTokenId == 0 ||
-                (this.ownerOf(_bottomTokenId) == msg.sender &&
-                    nfts[_bottomTokenId - 1].clothType == 3)
-        ,"you must be the owner or you tried not bottom item on bottom");
+            _propertyTokenId == 0 ||
+                (ownerOf(_propertyTokenId) == msg.sender)
+        ,"you must be the owner");
         
-        require(_headTokenId   == 0 || nfts[_headTokenId   - 1].isOnSale   == false, "head on sale, you cannot wear it!");
-        require(_headTokenId   == 0 || nfts[_headTokenId   - 1].isBiddable == false, "head on bid, you cannot wear it!");
-        require(_middleTokenId == 0 || nfts[_middleTokenId - 1].isOnSale   == false, "middle on sale, you cannot wear it!");
-        require(_middleTokenId == 0 || nfts[_middleTokenId - 1].isBiddable == false, "middle on bid, you cannot wear it!");
-        require(_bottomTokenId == 0 || nfts[_bottomTokenId - 1].isOnSale   == false, "bottom on sale, you cannot wear it!");
-        require(_bottomTokenId == 0 || nfts[_bottomTokenId - 1].isBiddable == false, "middle on bid, you cannot wear it!");
+        require(_propertyTokenId == 0 || nfts[_propertyTokenId - 1].isOnSale == false, "property on sale, you cannot occupy it!");
+        require(_propertyTokenId == 0 || nfts[_propertyTokenId - 1].isBiddable == false, "property on bid, you cannot occupy it!");
 
-        if (users[msg.sender].head != 0) {
-            nfts[users[msg.sender].head - 1].isWearing = false;
-        }
-        if (users[msg.sender].middle != 0) {
-            nfts[users[msg.sender].middle - 1].isWearing = false;
-        }
-        if (users[msg.sender].bottom != 0) {
-            nfts[users[msg.sender].bottom - 1].isWearing = false;
+        if (users[msg.sender].property != 0) {
+            nfts[users[msg.sender].property - 1].isOccupied = false;
         }
 
-       
-        if (_headTokenId != 0) {
-            nfts[_headTokenId - 1].isWearing = true;
-        }
-        if (_middleTokenId != 0) {
-            nfts[_middleTokenId - 1].isWearing = true;
-        }
-        if (_bottomTokenId != 0) {
-            nfts[_bottomTokenId - 1].isWearing = true;
+        if (_propertyTokenId != 0) {
+            nfts[_propertyTokenId - 1].isOccupied = true;
         }
 
-        users[msg.sender].head   = _headTokenId;
-        users[msg.sender].middle = _middleTokenId;
-        users[msg.sender].bottom = _bottomTokenId;
-
+        users[msg.sender].property = _propertyTokenId;
     }
 
-    function wearItem(uint256 _tokenId) public {
-        require(this.ownerOf(_tokenId)        == msg.sender, "You are not the owner of this item, so you cannot wear it.");
-        require(nfts[_tokenId - 1].isOnSale   == false,      "You cannot wear an item while it is on sale.");
-        require(nfts[_tokenId - 1].isBiddable == false,      "You cannot wear an item while it is on auction.");
-       
+    function occupySingleProperty(uint256 _tokenId) public {
+        require(ownerOf(_tokenId) == msg.sender, "You are not the owner of this item, so you cannot occupy it.");
+        require(nfts[_tokenId - 1].isOnSale == false, "You cannot occupy an item while it is on sale.");
+        require(nfts[_tokenId - 1].isBiddable == false, "You cannot occupy an item while it is on auction.");
 
-        if (nfts[_tokenId - 1].clothType == 1) {
-            if (users[msg.sender].head != 0)
-            {
-                nfts[users[msg.sender].head - 1].isWearing = false;
-            }
-            users[msg.sender].head = _tokenId;
-        } else if (nfts[_tokenId - 1].clothType == 2) {
-            if (users[msg.sender].middle != 0)
-            {
-                nfts[users[msg.sender].middle - 1].isWearing = false;
-            }
-            users[msg.sender].middle = _tokenId;
-        } else if (nfts[_tokenId - 1].clothType == 3) {
-            if (users[msg.sender].bottom != 0)
-            {
-                nfts[users[msg.sender].bottom - 1].isWearing = false;
-            }
-            users[msg.sender].bottom = _tokenId;
+        if (users[msg.sender].property != 0) {
+            nfts[users[msg.sender].property - 1].isOccupied = false;
         }
-         nfts[_tokenId - 1].isWearing = true;
+        users[msg.sender].property = _tokenId;
+        nfts[_tokenId - 1].isOccupied = true;
     }
 
-    function unWearItem(uint256 _clothType) public {
-        require(_clothType == 1 || _clothType == 2 || _clothType == 3, "Invalid cloth type.");
-
-        if (_clothType == 1) {
-            require(users[msg.sender].head !=0, "You must wear a head item first to unwear.");
-            nfts[users[msg.sender].head - 1].isWearing = false;
-            users[msg.sender].head = 0;
-        } else if (_clothType == 2) {
-            require(users[msg.sender].middle !=0, "You must wear a middle item first to unwear.");
-
-            nfts[users[msg.sender].middle - 1].isWearing = false;
-            users[msg.sender].middle = 0;
-        } else if (_clothType == 3) {
-            require(users[msg.sender].bottom !=0, "You must wear a bottom item first to unwear.");
-            nfts[users[msg.sender].bottom - 1].isWearing = false;
-            users[msg.sender].bottom = 0;
-        }
+    function vacateProperty() public {
+        require(users[msg.sender].property != 0, "You must occupy a property first to vacate.");
+        nfts[users[msg.sender].property - 1].isOccupied = false;
+        users[msg.sender].property = 0;
     }
 
     function tokensOfOwner(address _owner)
@@ -158,14 +89,24 @@ contract nftContract is ERC721Full {
         view
         returns (uint256[] memory)
     {
-        return _tokensOfOwner(_owner);
+        uint256 tokenCount = balanceOf(_owner);
+
+        if (tokenCount == 0) {
+            return new uint256[](0);
+        } else {
+            uint256[] memory result = new uint256[](tokenCount);
+            for (uint256 i = 0; i < tokenCount; i++) {
+                result[i] = tokenOfOwnerByIndex(_owner, i);
+            }
+            return result;
+        }
     }
 
     function putOnSale(uint256 _tokenId, uint256 _sellPrice) public {
       
         require(msg.sender == this.ownerOf(_tokenId), "You cannot put this item on sale, because you are not the owner of it.");
         require(nfts[_tokenId - 1].isOnSale == false, "Item is already on sale!");
-        require(nfts[_tokenId - 1].isWearing == false, "You must unwear it first, then you can sell it." );
+        require(nfts[_tokenId - 1].isOccupied == false, "You must vacate it first, then you can sell it." );
         
         nfts[_tokenId - 1].isOnSale = true;
         nfts[_tokenId - 1].sellPrice = _sellPrice; 
@@ -232,7 +173,7 @@ contract nftContract is ERC721Full {
 
         
         require(msg.sender == this.ownerOf(_tokenId), "Only owner of this item can put on sale" );
-        require(nfts[_tokenId - 1].isWearing == false,  "You must unwear it first, then you can put it on auction.");
+        require(nfts[_tokenId - 1].isOccupied == false,  "You must vacate it first, then you can put it on auction.");
         require(nfts[_tokenId - 1].isBiddable == false, "This item is already on auction!");
         
         nfts[_tokenId - 1].isBiddable = true; 
@@ -252,7 +193,6 @@ contract nftContract is ERC721Full {
         require(msg.sender == this.ownerOf(_tokenId), "You cannot cancel the auction of this item, because you are not the owner.");
         require(nfts[_tokenId - 1].isBiddable == true, "Item must be on auction before it can be canceled, currently it is not!");
         
-        
         if (nfts[_tokenId - 1].maxBid > 0) {
             users[nfts[_tokenId - 1].maxBidder].userBalance = add256(users[nfts[_tokenId - 1].maxBidder].userBalance, nfts[_tokenId - 1].maxBid);
         }
@@ -270,8 +210,6 @@ contract nftContract is ERC721Full {
     }
 
     function bid(uint256 _tokenId) public payable {
-
-   
         require(msg.value > 0, "You did not send any money");
         require(nfts[_tokenId - 1].isBiddable == true,"Item you tried to bid, is not biddable!");
         require(msg.value >= nfts[_tokenId - 1].maxBid, "The amount you tried to bid, is less than current max bid.");
@@ -345,49 +283,58 @@ contract nftContract is ERC721Full {
 
         uint initialBalance = users[msg.sender].userBalance;
         users[msg.sender].userBalance = sub256(initialBalance, _amount);
-        msg.sender.transfer(_amount);
-        
+        address payable recipient = payable(msg.sender);
+        recipient.transfer(_amount);
     }
 
-    function mint(
-        uint256 _clothType,
+
+    function createProperty(
         string memory _name,
         string memory _cid,
         string memory _rarity
     ) public {
-        require(isExist[_cid] == false, "Item link should be unique, for you to mint it");
-        require(this.totalSupply() < maxSupply, "You cannot mint any more item since you already reached the maximum supply.");
-        require(msg.sender ==owner, "Only owner can of this contract can mint, you are trying to some fraud.");
-        require(_clothType == 1 || _clothType == 2 || _clothType == 3, "Invalid cloth type.");
-        uint256 _id =
-            nfts.push(
-                nftData(
-                    _clothType,
-                    _name,
-                    _cid,
-                    _rarity,
-                    false,
-                    0,
-                    false,
-                    0,
-                    address(0x0),
-                    false
-                )
-            );
-        _mint(msg.sender, _id);
+        // Original function: createCloth
+        require(owner == msg.sender, "Only owner can create property.");
+        require(isExist[_cid] == false, "This CID is already exist, you cannot create same property twice.");
+        require(nfts.length < maxSupply, "You cannot create more properties. Max supply reached.");
+
+        uint256 tokenId = nfts.length + 1;
+        _mint(msg.sender, tokenId);
+        nftData memory newProperty = nftData({
+            name: _name,
+            cid: _cid,
+            rarity: _rarity,
+            isOnSale: false,
+            sellPrice: 0,
+            isBiddable: false,
+            maxBid: 0,
+            maxBidder: address(0x0),
+            isOccupied: false
+        });
+
+        nfts.push(newProperty);
         isExist[_cid] = true;
-        
 
-        emit nftTransaction(_id, "claimed", address(0x0), msg.sender, 0);
-
-        putOnSale(_id, 10000000000000000);
+        emit nftTransaction(
+            tokenId,
+            "created",
+            msg.sender,
+            address(0x0),
+            0
+        );
     }
 
+    function setMaxSupply(uint256 _maxSupply) public {
+        // Original function: setMaxSupply
+        require(owner == msg.sender, "Only owner can set max supply.");
+        require(nfts.length < _maxSupply, "You cannot set max supply less than created properties.");
+        maxSupply = _maxSupply;
+    }
 
-
-    function add256(uint256 a, uint256 b) internal pure returns (uint) {
-        uint c = a + b;
-        require(c >= a, "addition overflow");
+    function add256(uint256 _a, uint256 _b) private pure returns (uint256) {
+        // Original function: add256
+        uint256 c = _a + _b;
+        assert(c >= _a);
         return c;
     }
 
@@ -396,3 +343,4 @@ contract nftContract is ERC721Full {
         return a - b;
     }
 }
+

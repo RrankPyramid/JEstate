@@ -1,3 +1,4 @@
 {
-    "makefile.extensionOutputFolder": "./.vscode"
+    "makefile.extensionOutputFolder": "./.vscode",
+    "solidity.remappingsUnix": ["@openzeppelin/=truffle/node_modules/@openzeppelin/"]
 }
