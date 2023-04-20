@@ -1,9 +1,9 @@
 import React from "react";
 
-import { makeStyles, GridList, GridListTile } from "@material-ui/core";
+import { ImageList, ImageListItem, useMediaQuery } from "@mui/material";
+import { useTheme } from '@mui/system';
+import makeStyles from '@mui/styles/makeStyles';
 import MarketCard from "./marketCard";
-
-import withWidth, { isWidthUp } from "@material-ui/core/withWidth";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,21 +24,27 @@ const useStyles = makeStyles((theme) => ({
 
 const MarketCardList = (props) => {
   const classes = useStyles();
-  // console.log(props.marketCards);
+  const theme = useTheme();
+
+  const isXlUp = useMediaQuery(theme.breakpoints.up('xl'));
+  const isLgUp = useMediaQuery(theme.breakpoints.up('lg'));
+  const isMdUp = useMediaQuery(theme.breakpoints.up('md'));
+  const isSmUp = useMediaQuery(theme.breakpoints.up('sm'));
 
   const getGridListCols = () => {
-    if (isWidthUp("xl", props.width)) {
+    if (isXlUp) {
       return 4;
     }
 
-    if (isWidthUp("lg", props.width)) {
+    if (isLgUp) {
       return 3;
     }
 
-    if (isWidthUp("md", props.width)) {
+    if (isMdUp) {
       return 2;
     }
-    if (isWidthUp("sm", props.width)) {
+
+    if (isSmUp) {
       return 2;
     }
 
@@ -46,7 +52,7 @@ const MarketCardList = (props) => {
   };
 
   return (
-    <GridList
+    <ImageList
       spacing={15}
       cellHeight={400}
       cols={getGridListCols()}
@@ -54,7 +60,7 @@ const MarketCardList = (props) => {
     >
       {props.marketCards.map((cardItem, index) => {
         return (
-          <GridListTile key={index}>
+          <ImageListItem key={index}>
             <MarketCard
               name={cardItem.name}
               frequency={cardItem.rarity}
@@ -67,14 +73,11 @@ const MarketCardList = (props) => {
               id={cardItem.id}
               isProfile={props.isProfile}
             />
-          </GridListTile>
+          </ImageListItem>
         );
       })}
-    </GridList>
+    </ImageList>
   );
 };
 
-{
-}
-
-export default withWidth()(MarketCardList);
+export default MarketCardList;

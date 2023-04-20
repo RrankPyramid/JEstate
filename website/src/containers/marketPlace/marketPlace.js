@@ -1,8 +1,6 @@
 import React from "react";
-import { Container, Typography, Button } from "@material-ui/core";
+import { Container, Typography, Button } from "@mui/material";
 import MarketTab from "../../components/marketCard/marketTab";
-import Web3 from "web3";
-import * as fs from "fs";
 
 import NftContract from "../../abis/nft.json";
 

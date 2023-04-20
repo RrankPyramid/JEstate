@@ -1,5 +1,5 @@
 import React from "react";
-import Snackbar from '@material-ui/core/Snackbar';
+import Snackbar from '@mui/material/Snackbar';
 import {
   Container,
   Typography,
@@ -21,17 +21,17 @@ import {
   Input,
   TextField,
   SnackbarContent
-} from "@material-ui/core";
+} from "@mui/material";
 import team_bidis from'./team_bidis.png';
-import GitHubIcon from '@material-ui/icons/GitHub';
-import StoreMallDirectorySharpIcon from '@material-ui/icons/StoreMallDirectorySharp';
-import DirectionsRunSharpIcon from '@material-ui/icons/DirectionsRunSharp';
-import FormatListNumberedSharpIcon from '@material-ui/icons/FormatListNumberedSharp';
-import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
-import ShareSharpIcon from '@material-ui/icons/ShareSharp';
-import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import StoreMallDirectorySharpIcon from '@mui/icons-material/StoreMallDirectorySharp';
+import DirectionsRunSharpIcon from '@mui/icons-material/DirectionsRunSharp';
+import FormatListNumberedSharpIcon from '@mui/icons-material/FormatListNumberedSharp';
+import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+import ShareSharpIcon from '@mui/icons-material/ShareSharp';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 
 const useStyles = makeStyles({
   root: {

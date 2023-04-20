@@ -1,18 +1,18 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Redirect } from "react-router-dom";
 import { RecoilRoot } from "recoil";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import { createTheme, ThemeProvider, StyledEngineProvider, adaptV4Theme } from "@mui/material/styles";
 import MarketPlace from "./containers/marketPlace/marketPlace";
 import Profile from "./containers/profile/profile";
 import ItemPage from "./containers/itemPage/itemPage";
 import IndexPage from "./containers/index/index";
 import NotFoundPage from "./containers/notFoundPage/notFoundPage";
-import CssBaseline from "@material-ui/core/CssBaseline";
+import CssBaseline from "@mui/material/CssBaseline";
 import Navbar from "./components/navbar/navbar";
 import {  useRecoilValue, useRecoilState } from "recoil";
 import { snackbarControllerAtom, snackbarTextAtom,  } from "./recoils/atoms";
-import Snackbar from '@material-ui/core/Snackbar';
-import SnackbarContent from '@material-ui/core/SnackbarContent';
+import Snackbar from '@mui/material/Snackbar';
+import SnackbarContent from '@mui/material/SnackbarContent';
 
 const App = () => {
   const [metamask, setMetamask] = React.useState(false);
@@ -22,7 +22,7 @@ const App = () => {
 
 
 
-  const darkTheme = createMuiTheme({
+  const darkTheme = createTheme(adaptV4Theme({
     palette: {
       background: {
         paper: "#121212",
@@ -55,7 +55,7 @@ const App = () => {
     status: {
       danger: "#0000ff",
     },
-  });
+  }));
 
   React.useEffect(() =>{
     if(!window.eth && !window.ethereum){
@@ -68,14 +68,14 @@ const App = () => {
 
 
 
-  return (
-    <>
+  return <>
+  <StyledEngineProvider injectFirst>
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
      
         {metamask && <Navbar />}
         <Router>
-          <Switch>
+          <Routes>
             <Route exact path="/" component={IndexPage} />
             <Route  path="/marketplace" component={MarketPlace} />
             <Route  path="/allItems" component={MarketPlace} />
@@ -83,8 +83,7 @@ const App = () => {
             <Route path="/item/:id" component={ItemPage} />
             <Route  path="/notFound" component={NotFoundPage} />
             <Route component={NotFoundPage} />
-          </Switch>
-
+          </Routes>
 
           <Snackbar
               open={snackbarController}
@@ -104,10 +103,10 @@ const App = () => {
         </Router>
    
     </ThemeProvider>
+  </StyledEngineProvider>
 
-  
-    </>
-  );
+
+  </>;
 };
 
 export default App;

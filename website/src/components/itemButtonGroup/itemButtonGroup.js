@@ -1,16 +1,14 @@
 import React from "react";
-import {
-  makeStyles,
-  Button,
-  TextField,
-  Divider,
-  createStyles,
-} from "@material-ui/core";
+import { Button, TextField, Divider } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
+import createStyles from '@mui/styles/createStyles';
 import { atom, selector, useRecoilState, useRecoilValue } from "recoil";
 import { allItems, itemData, myAddress, itemIdAtom,  snackbarTextAtom, snackbarControllerAtom } from "../../recoils/atoms";
 
 import addresses from "../../constants/contracts";
 import NftContract from "../../abis/nft.json";
+import { ethers } from 'ethers';
+
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -34,16 +32,7 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-// const useStyles = makeStyles((theme) =>
-//   createStyles({
-//     container: {
-//       padding: theme.spacing(2)
-//     },
-//   });
 
-/*
-bugs:
-*/
 async function getRevertReason(txHash, setSnackbarText, setSnackbarController) {
   const tx = await window.web3.eth.getTransaction(txHash)
 

@@ -1,7 +1,8 @@
 import React from "react";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
-import FaceIcon from "@material-ui/icons/Face";
-import AccessibilityNewIcon from "@material-ui/icons/AccessibilityNew";
+import withStyles from '@mui/styles/withStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import FaceIcon from "@mui/icons-material/Face";
+import AccessibilityNewIcon from "@mui/icons-material/AccessibilityNew";
 import PropTypes from "prop-types";
 
 import { atom, selector, useRecoilState, useRecoilValue } from "recoil";
@@ -38,10 +39,10 @@ import {
   FormControl,
   InputLabel,
   Select,
-} from "@material-ui/core";
+} from "@mui/material";
 
-import FormGroup from "@material-ui/core/FormGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
 import MarketCardList from "./marketCardList";
 
@@ -148,14 +149,14 @@ const MarketTab = () => {
         <Grid
           container
           direction="row"
-          justify="space-between"
+          justifyContent="space-between"
           alignItems="flex-start"
         >
           <Grid item xs={10}>
             <Grid
               container
               direction="column"
-              justify="space-between"
+              justifyContent="space-between"
               alignItems="flex-start"
             >
               <Grid item>Filter By:</Grid>

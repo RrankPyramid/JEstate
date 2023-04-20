@@ -20,22 +20,21 @@ import {
   Input,
   TextField,
   Tooltip,
-} from "@material-ui/core";
+} from "@mui/material";
 
-import EditSharpIcon from "@material-ui/icons/EditSharp";
-import SaveIcon from "@material-ui/icons/Save";
+import EditSharpIcon from "@mui/icons-material/EditSharp";
+import SaveIcon from "@mui/icons-material/Save";
 
-import FaceIcon from "@material-ui/icons/Face";
-import KeyboardArrowRightRoundedIcon from "@material-ui/icons/KeyboardArrowRightRounded";
-import KeyboardArrowLeftRoundedIcon from "@material-ui/icons/KeyboardArrowLeftRounded";
+import FaceIcon from "@mui/icons-material/Face";
+import KeyboardArrowRightRoundedIcon from "@mui/icons-material/KeyboardArrowRightRounded";
+import KeyboardArrowLeftRoundedIcon from "@mui/icons-material/KeyboardArrowLeftRounded";
 
-import Carousel, { consts } from "react-elastic-carousel";
+import withStyles from '@mui/styles/withStyles';
+import makeStyles from '@mui/styles/makeStyles';
 
-import { withStyles, makeStyles } from "@material-ui/core/styles";
+import AccessibilityNewIcon from "@mui/icons-material/AccessibilityNew";
 
-import AccessibilityNewIcon from "@material-ui/icons/AccessibilityNew";
-
-import { atom, selector, useRecoilState, useRecoilValue } from "recoil";S
+import { atom, selector, useRecoilState, useRecoilValue } from "recoil";
 
 import {
   myUsername,
@@ -340,7 +339,7 @@ const Profile = (props) => {
       <Grid
         container
         direction="row"
-        justify="space-around"
+        justifyContent="space-around"
         alignItems="center"
       >
         <Grid className={classes.profileLeft} item xs={4}>
@@ -410,7 +409,7 @@ const Profile = (props) => {
                     setIsSetting(false);
                   });
               }}
-            >
+              size="large">
               <SaveIcon style={{ color: "#00D54B" }} />
             </IconButton>
           ) : !isThirdPerson ? (
@@ -420,7 +419,7 @@ const Profile = (props) => {
               onClick={() => {
                 setIsSetting(true);
               }}
-            >
+              size="large">
               <EditSharpIcon style={{ color: "#00D54B" }} />
             </IconButton>
           ) : (
@@ -479,89 +478,87 @@ const Profile = (props) => {
         });
     };
 
-    return (
-      <>
-        <Grid
-          style={{ marginTop: 30 }}
-          container
-          direction="row"
-          justify="space-around"
-          alignItems="flex-start"
-        >
-          <Grid item xs={3}>
-            <Typography variant="h5">
-              #Items
-              {/* {console.log("transactions", transactions)} */}
-            </Typography>
+    return <>
+      <Grid
+        style={{ marginTop: 30 }}
+        container
+        direction="row"
+        justifyContent="space-around"
+        alignItems="flex-start"
+      >
+        <Grid item xs={3}>
+          <Typography variant="h5">
+            #Items
+            {/* {console.log("transactions", transactions)} */}
+          </Typography>
+          <Typography variant="h5" className={classes.numberTextStyle}>
+            {properties.length}
+          </Typography>
+          <Typography variant="h5">Spent</Typography>
+          <MyTooltip title={window.web3.utils.fromWei(spentBought.toString())} arrow>
             <Typography variant="h5" className={classes.numberTextStyle}>
-              {properties.length}
+              {window.web3.utils.fromWei(spentBought.toString()).slice(0,4)} Ξ
             </Typography>
-            <Typography variant="h5">Spent</Typography>
-            <MyTooltip title={window.web3.utils.fromWei(spentBought.toString())} arrow>
-              <Typography variant="h5" className={classes.numberTextStyle}>
-                {window.web3.utils.fromWei(spentBought.toString()).slice(0,4)} Ξ
-              </Typography>
-            </MyTooltip>
-            <Typography variant="h5">Earned</Typography>
-            <MyTooltip title={window.web3.utils.fromWei(earnedSold.toString())} arrow>
-              <Typography variant="h5" className={classes.numberTextStyle}>
-                {window.web3.utils.fromWei(earnedSold.toString()).slice(0,4)} Ξ
-              </Typography>
-            </MyTooltip>
-          </Grid>
-          <Grid item xs={4}>
-            <Typography variant="h5">#Bought</Typography>
+          </MyTooltip>
+          <Typography variant="h5">Earned</Typography>
+          <MyTooltip title={window.web3.utils.fromWei(earnedSold.toString())} arrow>
             <Typography variant="h5" className={classes.numberTextStyle}>
-              {numberBought}
+              {window.web3.utils.fromWei(earnedSold.toString()).slice(0,4)} Ξ
             </Typography>
-            <Typography variant="h5">#Sold</Typography>
-            <Typography variant="h5" className={classes.numberTextStyle}>
-              {numberSold}
-            </Typography>
-          </Grid>
+          </MyTooltip>
         </Grid>
+        <Grid item xs={4}>
+          <Typography variant="h5">#Bought</Typography>
+          <Typography variant="h5" className={classes.numberTextStyle}>
+            {numberBought}
+          </Typography>
+          <Typography variant="h5">#Sold</Typography>
+          <Typography variant="h5" className={classes.numberTextStyle}>
+            {numberSold}
+          </Typography>
+        </Grid>
+      </Grid>
 
-        {!isThirdPerson && (
-          <>
-            <div style={{ display: "flex", flexDirection: "row" }}>{/*  */}
-              <MyTooltip title={window.web3.utils.fromWei(profileData.userBalance.toString())} placement="top" arrow>
-                <Typography>Balance: {window.web3.utils.fromWei(profileData.userBalance.toString()).slice(0, 4)} Ξ</Typography>
-              </MyTooltip>
-            </div>
-            <div style={{ display: "flex", flexDirection: "row" }}>
-              <TextField
-                error={withdrawMoneyTextFieldError}
-                onChange={(event) => {
-                  // console.log(event.target.value);
-                  if(event.target.value.toString().match(regex)) {
-                    setwithdrawMoneyTextFieldError(false);
-                  }
-                  else {
-                    setwithdrawMoneyTextFieldError(true);
-                  }
-                  setWithdrawAmount(event.target.value);
-                }}
-                label="Amount"
-                id="outlined-margin-none"
-                className={classes.textField}
-                margin="dense"
-                helperText="You need to give a valid amount."
-                variant="outlined"
-              />
-              <Button
-                disabled={withdrawMoneyTextFieldError}
-                className={classes.myMoneyButton}
-                onClick={() => {
-                  onWithdrawPress();
-                }}
-              >
-                Withdraw
-              </Button>
-            </div>
-          </>
-        )}
-      </>
-    );
+      {!isThirdPerson && (
+        <>
+          <div style={{ display: "flex", flexDirection: "row" }}>{/*  */}
+            <MyTooltip title={window.web3.utils.fromWei(profileData.userBalance.toString())} placement="top" arrow>
+              <Typography>Balance: {window.web3.utils.fromWei(profileData.userBalance.toString()).slice(0, 4)} Ξ</Typography>
+            </MyTooltip>
+          </div>
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            <TextField
+              error={withdrawMoneyTextFieldError}
+              onChange={(event) => {
+                // console.log(event.target.value);
+                if(event.target.value.toString().match(regex)) {
+                  setwithdrawMoneyTextFieldError(false);
+                }
+                else {
+                  setwithdrawMoneyTextFieldError(true);
+                }
+                setWithdrawAmount(event.target.value);
+              }}
+              label="Amount"
+              id="outlined-margin-none"
+              className={classes.textField}
+              margin="dense"
+              helperText="You need to give a valid amount."
+              variant="outlined"
+            />
+            <Button
+              disabled={withdrawMoneyTextFieldError}
+              className={classes.myMoneyButton}
+              onClick={() => {
+                onWithdrawPress();
+              }}
+            >
+              Withdraw
+            </Button>
+          </div>
+        </>
+      )}
+    </>;
   };
 
   const ProfileLeftMenu = () => {
@@ -644,7 +641,7 @@ const Profile = (props) => {
         style={{ marginTop: 30 }}
         container
         direction="row"
-        justify="space-around"
+        justifyContent="space-around"
         alignItems="flex-start"
       >
         <Grid item xs={8}>
@@ -714,86 +711,84 @@ const Profile = (props) => {
     const [marketIsOnSale, setMarketIsOnSale] = useRecoilState(isOnSale);
     const [marketRariryLevel, setMarketRariryLevel] =
       useRecoilState(rarityLevel);
-    return (
-      <>
-        <Grid
-          container
-          direction="row"
-          justify="space-around"
-          alignItems="flex-start"
-        >
-          <Grid item xs={8}>
-            <Grid
-              container
-              direction="column"
-              justify="space-around"
-              alignItems="flex-start"
-            >
-              <Grid item>Filter By:</Grid>
-              <Grid item>
-                <FormGroup row style={{ marginLeft: -16 }}>
-                  <FormControlLabel
-                    control={
-                      <Switch
-                        checked={marketIsBiddable}
-                        onChange={() => {
-                          setMarketIsBiddable(!marketIsBiddable);
-                        }}
-                        name="Biddable"
-                      />
-                    }
-                    label="Biddable"
-                    labelPlacement="start"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Switch
-                        checked={marketIsOnSale}
-                        onChange={() => {
-                          setMarketIsOnSale(!marketIsOnSale);
-                        }}
-                        name="Fixed Price"
-                      />
-                    }
-                    label="Fixed Price"
-                    labelPlacement="start"
-                  />
-                  <div
-                    style={{ marginTop: 10, marginLeft: 20, marginRight: 10 }}
+    return <>
+      <Grid
+        container
+        direction="row"
+        justifyContent="space-around"
+        alignItems="flex-start"
+      >
+        <Grid item xs={8}>
+          <Grid
+            container
+            direction="column"
+            justifyContent="space-around"
+            alignItems="flex-start"
+          >
+            <Grid item>Filter By:</Grid>
+            <Grid item>
+              <FormGroup row style={{ marginLeft: -16 }}>
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={marketIsBiddable}
+                      onChange={() => {
+                        setMarketIsBiddable(!marketIsBiddable);
+                      }}
+                      name="Biddable"
+                    />
+                  }
+                  label="Biddable"
+                  labelPlacement="start"
+                />
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={marketIsOnSale}
+                      onChange={() => {
+                        setMarketIsOnSale(!marketIsOnSale);
+                      }}
+                      name="Fixed Price"
+                    />
+                  }
+                  label="Fixed Price"
+                  labelPlacement="start"
+                />
+                <div
+                  style={{ marginTop: 10, marginLeft: 20, marginRight: 10 }}
+                >
+                  Rarity:
+                </div>
+                <FormControl>
+                  {/* <InputLabel htmlFor="age-native-simple">Rarity</InputLabel> */}
+                  <Select
+                    style={{ width: 100 }}
+                    native
+                    value={marketRariryLevel}
+                    onChange={(event) => {
+                      setMarketRariryLevel(event.target.value);
+                    }}
+                    inputProps={{
+                      name: "age",
+                      id: "age-native-simple",
+                    }}
                   >
-                    Rarity:
-                  </div>
-                  <FormControl>
-                    {/* <InputLabel htmlFor="age-native-simple">Rarity</InputLabel> */}
-                    <Select
-                      style={{ width: 100 }}
-                      native
-                      value={marketRariryLevel}
-                      onChange={(event) => {
-                        setMarketRariryLevel(event.target.value);
-                      }}
-                      inputProps={{
-                        name: "age",
-                        id: "age-native-simple",
-                      }}
-                    >
-                      <option value={"all"}>All</option>
-                      <option value={"legendary"}>Legendary</option>
-                      <option value={"epic"}>Epic</option>
-                      <option value={"rare"}>Rare</option>
-                      <option value={"common"}>Common</option>
-                    </Select>
-                  </FormControl>
-                </FormGroup>
-              </Grid>
+                    <option value={"all"}>All</option>
+                    <option value={"legendary"}>Legendary</option>
+                    <option value={"epic"}>Epic</option>
+                    <option value={"rare"}>Rare</option>
+                    <option value={"common"}>Common</option>
+                  </Select>
+                </FormControl>
+              </FormGroup>
             </Grid>
           </Grid>
-          <Grid item xs={2}>
-
-          </Grid>
         </Grid>
-      </>
-    );
+        <Grid item xs={2}>
+
+        </Grid>
+      </Grid>
+    </>;
   };
   const ProfileAllItems = () => {
     const classes = useStyles();
@@ -805,7 +800,7 @@ const Profile = (props) => {
         style={{ marginTop: 30 }}
         container
         direction="row"
-        justify="space-around"
+        justifyContent="space-around"
         alignItems="flex-start"
       >
         <Grid item xs={12}>
@@ -829,7 +824,7 @@ const Profile = (props) => {
       <Grid
         container
         direction="row"
-        justify="space-between"
+        justifyContent="space-between"
         alignItems="flex-start"
       >
         <Grid

@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  makeStyles,
   Button,
   Grid,
   Container,
@@ -13,16 +12,17 @@ import {
   TableBody,
   Typography,
   IconButton,
-} from "@material-ui/core";
-import DeleteIcon from "@material-ui/icons/Delete";
-import CloseIcon from "@material-ui/icons/Close";
-import VisibilityIcon from "@material-ui/icons/Visibility";
-import EditIcon from "@material-ui/icons/Edit";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import PanToolSharpIcon from "@material-ui/icons/PanToolSharp";
-import LocalOfferSharpIcon from "@material-ui/icons/LocalOfferSharp";
-import StarsIcon from "@material-ui/icons/Stars";
-import DnsIcon from "@material-ui/icons/Dns";
+} from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
+import DeleteIcon from "@mui/icons-material/Delete";
+import CloseIcon from "@mui/icons-material/Close";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import EditIcon from "@mui/icons-material/Edit";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import PanToolSharpIcon from "@mui/icons-material/PanToolSharp";
+import LocalOfferSharpIcon from "@mui/icons-material/LocalOfferSharp";
+import StarsIcon from "@mui/icons-material/Stars";
+import DnsIcon from "@mui/icons-material/Dns";
 import ItemButtonGroup from "../../components/itemButtonGroup/itemButtonGroup";
 import NftContract from "../../abis/nft.json";
 
@@ -191,14 +191,14 @@ const ItemPage = (props) => {
     <Grid
       container
       direction="row"
-      justify="space-between"
+      justifyContent="space-between"
       alignItems="flex-start"
     >
       <Grid item xs={4}>
         <Grid
           container
           direction="column"
-          justify="center"
+          justifyContent="center"
           alignItems="center"
           style={{ height: "90vh" }}
         >
@@ -217,7 +217,7 @@ const ItemPage = (props) => {
         <Grid
           container
           direction="row"
-          justify="flex-start"
+          justifyContent="flex-start"
           alignItems="center"
           style={{ height: "90vh" }}
         >
@@ -226,7 +226,7 @@ const ItemPage = (props) => {
               <Grid
                 container
                 direction="column"
-                justify="center"
+                justifyContent="center"
                 alignItems="flex-start"
               >
                 {/* <Paper variant="outlined"> */}
@@ -354,7 +354,7 @@ const ItemPage = (props) => {
               <Grid
                 container
                 direction="column"
-                justify="center"
+                justifyContent="center"
                 alignItems="flex-start"
               >
                 {/* <Paper variant="outlined"> */}
