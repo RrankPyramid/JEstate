@@ -75,15 +75,16 @@ const App = () => {
      
         {metamask && <Navbar />}
         <Router>
-          <Routes>
-            <Route exact path="/" component={IndexPage} />
-            <Route  path="/marketplace" component={MarketPlace} />
-            <Route  path="/allItems" component={MarketPlace} />
-            <Route path="/profile/:address" component={Profile} />
-            <Route path="/item/:id" component={ItemPage} />
-            <Route  path="/notFound" component={NotFoundPage} />
-            <Route component={NotFoundPage} />
-          </Routes>
+        <Routes>
+          <Route exact path="/" element={<IndexPage />} />
+          <Route path="/marketplace" element={<MarketPlace />} />
+          <Route path="/allItems" element={<MarketPlace />} />
+          <Route path="/profile/:address" element={<Profile />} />
+          <Route path="/item/:id" element={<ItemPage />} />
+          <Route path="/notFound" element={<NotFoundPage />} />
+          <Route element={<NotFoundPage />} />
+        </Routes>
+
 
           <Snackbar
               open={snackbarController}

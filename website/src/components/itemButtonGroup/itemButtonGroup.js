@@ -7,8 +7,6 @@ import { allItems, itemData, myAddress, itemIdAtom,  snackbarTextAtom, snackbarC
 
 import addresses from "../../constants/contracts";
 import NftContract from "../../abis/nft.json";
-import { ethers } from 'ethers';
-
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -32,7 +30,16 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
+// const useStyles = makeStyles((theme) =>
+//   createStyles({
+//     container: {
+//       padding: theme.spacing(2)
+//     },
+//   });
 
+/*
+bugs:
+*/
 async function getRevertReason(txHash, setSnackbarText, setSnackbarController) {
   const tx = await window.web3.eth.getTransaction(txHash)
 
@@ -475,11 +482,13 @@ const ItemButtonGroup = (props) => {
       />
     ) : null;
 
-  const occupyButton = !data.isWearing ? (
+  const occupyButton = !data.isOccupied ? (
     <Button
       className={classes.myButton}
       onClick={() => {
         handleOccupy();
+        // console.log("occupy: %d", data.isOccupied);
+        // data.isWearing = true;
       }}
     >
       Move in this property

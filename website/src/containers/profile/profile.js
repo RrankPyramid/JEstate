@@ -34,6 +34,8 @@ import makeStyles from '@mui/styles/makeStyles';
 
 import AccessibilityNewIcon from "@mui/icons-material/AccessibilityNew";
 
+import { useParams } from 'react-router-dom';
+
 import { atom, selector, useRecoilState, useRecoilValue } from "recoil";
 
 import {
@@ -202,8 +204,9 @@ const MyTooltip = withStyles((theme) => ({
 
 const Profile = (props) => {
   const classes = useStyles();
+  const { address: profiAddress } = useParams();
   const [profileAddress, setProfileAdress] = React.useState(
-    props.match.params.address
+    profiAddress ? profiAddress : ""
   );
 
   const [numberSold, setNumberSold] = React.useState(0);

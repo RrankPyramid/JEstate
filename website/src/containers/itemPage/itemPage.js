@@ -25,6 +25,7 @@ import StarsIcon from "@mui/icons-material/Stars";
 import DnsIcon from "@mui/icons-material/Dns";
 import ItemButtonGroup from "../../components/itemButtonGroup/itemButtonGroup";
 import NftContract from "../../abis/nft.json";
+import { useParams } from 'react-router-dom';
 
 import { getUsername } from "../../utils/getUsernameFromAddress";
 
@@ -100,6 +101,7 @@ const ItemPage = (props) => {
   const [transactions, setTransactions] = useRecoilState(transactionData);
   const [id, setId] = useRecoilState(itemIdAtom);
   const [owner, setOwner] = React.useState("...");
+  const { id: myId } = useParams();
 
 
   if(!window.eth && !window.ethereum){
@@ -110,7 +112,7 @@ const ItemPage = (props) => {
     let accounts = await window.ethereum.enable();
     let myAddress = await window.ethereum.selectedAddress;
     setAddress(myAddress);
-    const myId = props.match.params.id;
+
     setId(myId);
     // setLoading(false);
 
@@ -420,18 +422,18 @@ const ItemPage = (props) => {
                                 ],
                             }}
                           >
-                            <TableCell align="center" style={{color:"#000", fontSize: 16}}>
+                            <TableCell align="center" style={{color:"#ffffff", fontSize: 16}}>
                               {transaction.returnValues.transactionType}
                             </TableCell>
 
-                            <TableCell align="center" style={{color:"#000", fontSize: 16}}>
+                            <TableCell align="center" style={{color:"#ffffff", fontSize: 16}}>
                               {transaction.returnValues.fromAddress ==
                               "0x0000000000000000000000000000000000000000" ? (
                                 "-"
                               ) : (
                                 <Button
                                   size="small"
-                                  style={{fontSize: 16}}
+                                  style={{fontSize: 16, color: "#ffffff"}}
                                   color="primary"
                                   onClick={() => {
                                     window.location = "/profile/" + data.owner;
@@ -451,14 +453,14 @@ const ItemPage = (props) => {
                                 </Button>
                               )}
                             </TableCell>
-                            <TableCell align="center" style={{color:"#000", fontSize: 16}}>
+                            <TableCell align="center" style={{color: "#ffffff", fontSize: 16}}>
                               {transaction.returnValues.toAddress ==
                               "0x0000000000000000000000000000000000000000" ? (
                                 "-"
                               ) : (
                                 <Button
                                   size="small"
-                                  style={{fontSize: 16}}
+                                  style={{fontSize: 16, color: "#ffffff"}}
                                   color="primary"
                                   onClick={() => {
                                     window.location = "/profile/" + data.owner;
@@ -477,15 +479,15 @@ const ItemPage = (props) => {
                                 </Button>
                               )}
                             </TableCell>
-                            <TableCell align="center" style={{color:"#000", fontSize: 16}}>
+                            <TableCell align="center" style={{color:"#ffffff", fontSize: 16}}>
                               {transaction.returnValues.value == 0
                                 ? " - "
                                 : window.web3.utils.fromWei(transaction.returnValues.value) + " Ξ"}
                             </TableCell>
-                            <TableCell align="center" style={{color:"#000", fontSize: 16}}>
+                            <TableCell align="center" style={{color:"#ffffff", fontSize: 16}}>
                             <Button
                                   size="small"
-                                  style={{fontSize: 16}}
+                                  style={{fontSize: 16, color: "#ffffff"}}
                                   color="primary"
                                   onClick={() => {
                                     window.location.href =  "https://ropsten.etherscan.io/tx/" + transaction.transactionHash;
