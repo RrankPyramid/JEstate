@@ -37,7 +37,6 @@ You can choose to run the project on a local chain or deploy it on a public test
 ```bash
 $ cd JEState
 $ npm install ganache-cli
-$ npm install @openzeppelin/contracts
 $ npx ganache-cli -p 7545 --deterministic
 ```
 
@@ -48,6 +47,7 @@ We use Truffle for compiling and deploying smart contracts. To deploy the smart 
 ```bash
 $ cd JEState/truffle
 $ npm install truffle
+$ npm install @openzeppelin/contracts
 $ npx truffle migrate --network development
 ```
 
