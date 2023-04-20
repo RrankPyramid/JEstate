@@ -84,12 +84,12 @@ In the JEState platform there is a limited number of people who can create virtu
 
 ### Step 1: Switch to the correct directory.
 ```bash
-cd JEstate/truffle
+$ cd JEstate/truffle
 ```
 
 ### Step 2: Open the truffle console.
 ```bash
-npx truffle console --network development
+$ npx truffle console --network development
 ```
 
 ### Step 3: Create new property by following command:
