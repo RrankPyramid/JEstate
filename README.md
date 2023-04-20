@@ -96,7 +96,7 @@ truffle(development)> let nft=await nftContract.deployed()
 truffle(development)> nft.createProperty("Your-Property-Name", "Your-Property-CID", rarity(e.g. "rare", "common", "epic", "legendary"));
 ```
 
-**Note: ** Our project use IPFS system to store the image of property(NFT). If you want to create a image of NFT yourself, you can choose create a local IPFS system (See https://ipfs.tech/#install). Or you may upload it to a public IPFS platform (Like Pinata: https://www.pinata.cloud/ )
+**Note:** Our project use IPFS system to store the image of property(NFT). If you want to create a image of NFT yourself, you can choose create a local IPFS system (See https://ipfs.tech/#install). Or you may upload it to a public IPFS platform (Like Pinata: https://www.pinata.cloud/ )
 For example, here is a valid CID: QmaBMvgxKJYz7jNcA2tbcwK4oEn7y2QXJiwCnHT4yrwsfR.
 
 Then, you will see the new NFT showing in the website.
