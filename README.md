@@ -46,8 +46,7 @@ $ npx ganache-cli -p 7545 --deterministic
 We use Truffle for compiling and deploying smart contracts. To deploy the smart contract, run the following commands:
 ```bash
 $ cd JEState/truffle
-$ npm install truffle
-$ npm install @openzeppelin/contracts
+$ npm install 
 $ npx truffle migrate --network development
 ```
 
