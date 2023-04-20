@@ -5,8 +5,8 @@ services:
     build:
       context: ./website
       dockerfile: Dockerfile
-    image: blockchain-client
-    container_name: blockchain-react-client
+    image: jestate-client
+    container_name: jestate-react-client
     command: yarn start
     volumes:
       - ./website/:/usr/app
