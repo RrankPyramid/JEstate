@@ -20,6 +20,7 @@ In the context of the metaverse, we understand that property rights are crucial.
 Join our growing community and discover the many benefits and opportunities that await you in the metaverse with JEstate. Experience a secure, transparent, and innovative trading platform designed for the future of digital property management and interaction.
 
 
+---
 
 ## JEstate Quick Start Guide
 
@@ -46,8 +47,7 @@ $ npx ganache-cli -p 7545 --deterministic
 We use Truffle for compiling and deploying smart contracts. To deploy the smart contract, run the following commands:
 ```bash
 $ cd JEState/truffle
-$ npm install truffle
-$ npm install @openzeppelin/contracts
+$ npm install 
 $ npx truffle migrate --network development
 ```
 
@@ -75,6 +75,8 @@ $ docker compose -f docker-compose.dev.yml
 Open your browser and visit http://localhost:3000 to access the full web page. If you are running it for the first time, you may need to register a MetaMask local wallet. This wallet is local, and all data will not be uploaded to the web page. It's just a security gate.
 
 Happy trading on the JEstate platform!
+
+---
 
 ## How to create a property in JEState?
 
