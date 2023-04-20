@@ -1,4 +1,4 @@
-# JEstate
+# JEstate - A Revolutionary Decentralised Trading Platform in the Metaverse
 
 Welcome to JEstate, the innovative decentralised trading platform designed for the metaverse. Our cutting-edge solution leverages the power of blockchain technology to transform the way you trade, invest, and interact with digital properties within the virtual world. By incorporating advanced features such as enhanced identity verification and tamper-evidence, JEstate is committed to providing a secure, transparent, and seamless experience that surpasses traditional centralised platforms.
 
