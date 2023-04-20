@@ -54,6 +54,7 @@ $ npx truffle migrate --network development
 ### Step 4: Test contract security (optional)
 After successfully deploying the contract, you can run functionality and integrity tests with this command:
 ```bash
+$ npm install
 $ npx truffle test
 ```
 
