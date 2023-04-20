@@ -809,7 +809,7 @@ const Profile = (props) => {
         <Grid item xs={12}>
           <FilterItems />
         </Grid>
-        <Grid item xs={12} style={{ marginTop: 20 }}>
+        <Grid item xs={12} style={{ marginTop: 20, marginBottom: 20 }}>
           <MarketCardList marketCards={allFilteredData} isProfile={true} />
         </Grid>
       </Grid>

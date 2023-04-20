@@ -54,7 +54,7 @@ const MarketCardList = (props) => {
   return (
     <ImageList
       spacing={15}
-      cellHeight={400}
+      cellHeight={700}
       cols={getGridListCols()}
       className={classes.gridList}
     >
