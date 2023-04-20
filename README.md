@@ -40,6 +40,8 @@ $ npm install ganache-cli
 $ npx ganache-cli -p 7545 --deterministic
 ```
 
+**Note:** If you want to use another network, be sure to modify your own contract address in website/src/constants/contract.js.
+
 ### Step 3: Deploy the smart contract
 We use Truffle for compiling and deploying smart contracts. To deploy the smart contract, run the following commands:
 ```bash
@@ -72,3 +74,31 @@ $ docker compose -f docker-compose.dev.yml
 Open your browser and visit http://localhost:3000 to access the full web page. If you are running it for the first time, you may need to register a MetaMask local wallet. This wallet is local, and all data will not be uploaded to the web page. It's just a security gate.
 
 Happy trading on the JEstate platform!
+
+## How to create a property in JEState?
+
+In the JEState platform there is a limited number of people who can create virtual properties. You must qualify as a contract owner in order to create a new property. To try to create a new property on your local test chain, you can use the following steps:
+
+### Step 1: Switch to the correct directory.
+```bash
+cd JEstate/truffle
+```
+
+### Step 2: Open the truffle console.
+```bash
+npx truffle console --network development
+```
+
+### Step 3: Create new property by following command:
+```nodejs
+let nft=await nftContract.deployed();
+nft.createProperty("YourPropertyName", "YourPropertyCid", "Rarity");
+```
+
+**Note: ** Our project use IPFS system to store the image of property(NFT). If you want to create a image of NFT yourself, you can choose create a local IPFS system (See https://ipfs.tech/#install). Or you may upload it to a public IPFS platform (Like Pinata: https://www.pinata.cloud/ )
+
+Then, you will see the new NFT showing in the website.
+Enjoy!
+
+
+
