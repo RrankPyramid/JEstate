@@ -68,7 +68,7 @@ You can also find it in Firefox plug-in market.
 ### Step 6: Start the web server
 Ensure Docker is installed on your system (https://docs.docker.com/get-docker/). Then, go back to the project root directory and run the following command:
 ```bash
-$ docker compose -f docker-compose.dev.yml
+$ docker compose -f docker-compose.dev.yml up
 ```
 
 ### Step 7: Launch the web page
