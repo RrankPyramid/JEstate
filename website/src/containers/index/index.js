@@ -22,7 +22,6 @@ import {
   TextField,
   SnackbarContent
 } from "@mui/material";
-import team_bidis from'./team_bidis.png';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import StoreMallDirectorySharpIcon from '@mui/icons-material/StoreMallDirectorySharp';
 import DirectionsRunSharpIcon from '@mui/icons-material/DirectionsRunSharp';
